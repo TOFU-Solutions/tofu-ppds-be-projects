@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   IsDefined,
+  IsEnum,
   IsNotEmpty,
   IsNumber,
   IsObject,
@@ -11,6 +12,7 @@ import {
 import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
+import { ProjectStatus } from '../enums/project-status.enum';
 
 /**
  * @class
@@ -107,6 +109,22 @@ export class ProjectEntity extends BaseEntity {
   @MinLength(1)
   @IsOptional()
   season?: string;
+
+  /**
+   * @property {ProjectStatus} status - the status of the project
+   * @since 0.0.1
+   */
+  @ApiProperty({
+    name: 'status',
+    description: 'the status of the project',
+    enum: ProjectStatus,
+    required: false,
+    default: ProjectStatus.Active,
+    example: ProjectStatus.Active,
+  })
+  @IsEnum(ProjectStatus)
+  @IsOptional()
+  status: ProjectStatus = ProjectStatus.Active;
 
   /**
    * @property {string[]} tags - the tags of the project

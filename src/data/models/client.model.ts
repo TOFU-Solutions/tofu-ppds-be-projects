@@ -143,6 +143,12 @@ export class ClientModel extends BaseIndestructableModel {
           type: String,
           required: false,
         },
+        status: {
+          type: String,
+          enum: ['ACTIVE', 'ARCHIVED'],
+          default: 'ACTIVE',
+          required: true,
+        },
         tags: {
           type: [String],
           required: false,
