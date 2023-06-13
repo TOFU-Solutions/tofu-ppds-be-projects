@@ -1,0 +1,58 @@
+app:
+  controls:
+    superusers:
+      - mark.leung@tofu.solutions
+  env: local
+  frontend: 
+    host: http://localhost:3000
+  name: solutions.tofu.ppds.projects
+  namespace: solution.tofu.ppds
+  port: 3101
+  setup:
+    directory: loaders
+    application:
+      loader: application.loader.json
+  swagger: 
+    path: docs
+
+config:
+  superusers:
+    - mark.leung@tofu.solutions
+  token:
+    ttl: 30
+
+datasource: 
+  mongo:
+    host: localhost
+    password: mongo
+    port: 27017
+    user: mongo
+    database: tofu-ppds-projects
+    mechanism: DEFAULT
+
+integration:
+  rabbitmq:
+    host: localhost
+    password: tofuadmin
+    port: 5672
+    user: tofu
+    root: io.tofu.core
+    directories:
+      common: 
+        setup: common.application.setup
+
+oauth2:
+  audience: http://core.api.tofu.solutions
+  clientId: 7yO68S448xSTQdgVvSLjZNnR57Y4FDrL
+  domain: dev-i4qyh5nibdng7xcd.us.auth0.com
+  manager: http://core.api.tofu.solutions
+  secret: RItZbx4nZFsosXajxItdJLUfaLTTQK9YJBKgOjfV7Cdx5IbOf9Fr4KomGG-wOL9_
+  scopes: 
+    openid: 'OpenID Connect standard'
+    profile: 'OpenID Connect built-in scope: profile'
+    email: 'OpenID Connect built-in scope: email'
+
+redis:
+  host: localhost
+  port: 6379
+  password: tofuadmin

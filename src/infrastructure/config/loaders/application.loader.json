@@ -1,0 +1,41 @@
+{
+    "application": "solutions.core.workspace",
+    "roles": [
+        {
+            "code": "SYS_ADMIN",
+            "description": [
+                { "locale": "en", "value": "Users who manages the configuration for the workspace" },
+                { "locale": "ch", "value": "负责管理工作区的配置之用户" },
+                { "locale": "jp", "value": "ワークスペースの設定を管理するユーザー" },
+                { "locale": "zh", "value": "負責管理工作區的設定之用戶" }
+            ],
+            "name": [
+                { "locale": "en", "value": "Workspace Administrator"},
+                { "locale": "ch", "value": "工作区管理员" },
+                { "locale": "jp", "value": "ワークスペース管理者" },
+                { "locale": "zh", "value": "工作區管理員" }
+            ]        
+        }
+    ],
+    "permissions": [
+    ],
+    "settings": [
+        { 
+            "description": [
+                { "locale": "en", "value": "The default locale for the workspace" },
+                { "locale": "ch", "value": "工作区的预设语系" },
+                { "locale": "jp", "value": "ワークスペースのデフォルトロケール" },
+                { "locale": "zh", "value": "工作區的預設語系"}
+            ],
+            "label": [
+                { "locale": "en", "value": "Default Language" },
+                { "locale": "ch", "value": "预设语系" },
+                { "locale": "jp", "value": "デフォルトロケール" },
+                { "locale": "zh", "value": "預設語系" }
+            ],
+            "key": "workspace.default.locale"            
+        }
+    ],
+    "templates": [
+    ]
+}
