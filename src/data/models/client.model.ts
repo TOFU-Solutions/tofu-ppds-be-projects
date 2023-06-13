@@ -1,4 +1,5 @@
 import { Prop } from '@nestjs/mongoose';
+import { ProjectEntity } from 'src/business/entities/project.entity';
 import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseIndestructableModel } from 'src/utils/generics/model-undestructable.generic';
 
@@ -87,6 +88,76 @@ export class ClientModel extends BaseIndestructableModel {
     required: false,
   })
   owner: string;
+
+  /**
+   * @property {ProjectEntity[]} projects - the projects this client has
+   * @since 0.0.1
+   */
+  @Prop({
+    type: [
+      {
+        id: {
+          type: String,
+          required: true,
+          unique: true,
+        },
+        collection: {
+          type: String,
+          required: true,
+        },
+        createdOn: {
+          type: Date,
+          default: Date.now,
+          required: true,
+        },
+        description: [
+          {
+            locale: {
+              type: String,
+              required: true,
+              validate: [
+                (v: string) => v.length === 2,
+                'locale must be 2 characters long',
+              ],
+            },
+            value: {
+              type: String,
+              required: false,
+            },
+          },
+        ],
+        lastUpdatedOn: {
+          type: Date,
+          default: Date.now,
+          required: true,
+        },
+        name: {
+          type: String,
+          required: true,
+        },
+        owner: {
+          type: String,
+          required: false,
+        },
+        season: {
+          type: String,
+          required: false,
+        },
+        tags: {
+          type: [String],
+          required: false,
+          default: [],
+        },
+        year: {
+          type: Number,
+          required: false,
+        },
+      },
+    ],
+    default: [],
+    required: false,
+  })
+  projects: ProjectEntity[];
 
   /**
    * @property {string} workspace - the workspace this client belongs to

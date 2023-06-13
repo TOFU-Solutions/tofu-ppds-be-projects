@@ -10,6 +10,8 @@ import {
 import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
+import { ProjectEntity } from './project.entity';
+import { BaseCodedEntity } from 'src/utils/generics/entity-coded.entity';
 
 /**
  * @class
@@ -17,10 +19,10 @@ import { v4 as uuid } from 'uuid';
  * @description the client refers to a customer or brand a project is for
  * @version 0.0.1
  * @since 0.0.1
- * @extends BaseEntity
+ * @extends BaseCodedEntity
  * @author Mark Leung <leungas@gmail.com>
  */
-export class ClientEntity extends BaseEntity {
+export class ClientEntity extends BaseCodedEntity {
   /**
    * @property {string} code - the code of the client
    * @since 0.0.1
@@ -110,6 +112,43 @@ export class ClientEntity extends BaseEntity {
   @IsUUID()
   @IsOptional()
   owner?: string;
+
+  /**
+   * @property {ProjectEntity[]} projects - the projects this client has
+   * @since 0.0.1
+   */
+  @ApiProperty({
+    name: 'projects',
+    description: 'the projects this client has',
+    type: 'array',
+    items: {
+      type: 'ProjectEntity',
+    },
+    required: false,
+    default: [],
+    example: [
+      {
+        id: uuid(),
+        collection: 'project 1',
+        createdOn: new Date().toISOString(),
+        description: [
+          { locale: 'en', value: 'Project Description' },
+          { locale: 'ch', value: '項目描述' },
+          { locale: 'jp', value: 'プロジェクトの説明' },
+          { locale: 'zh', value: '項目描述' },
+        ],
+        lastUpdatedOn: new Date().toISOString(),
+        name: 'Project Name',
+        owner: uuid(),
+        season: 'FW',
+        tags: ['tag1', 'tag2'],
+        year: 2021,
+      },
+    ],
+  })
+  @IsObject({ each: true })
+  @IsOptional()
+  projects: ProjectEntity[] = [];
 
   /**
    * @property {string} workspace - the workspace this client belongs to

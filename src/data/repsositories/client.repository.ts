@@ -5,6 +5,7 @@ import { ClientModel } from '../models/client.model';
 import { Model } from 'mongoose';
 import { plainToInstance } from 'class-transformer';
 import { BadRequestException } from '@nestjs/common';
+import { ProjectEntity } from 'src/business/entities/project.entity';
 
 /**
  * @class
@@ -64,6 +65,28 @@ export class ClientModelRepository extends BaseModelRepository<ClientDocument> {
       } else {
         throw new BadRequestException(`Invalid data provided: ${keys}`);
       }
+    }
+  }
+
+  /**
+   * @method setProject
+   * @description sets the projects for a client
+   * @param {string} client - the id of the client to set the projects for
+   * @param {ProjectEntity[]} projects - the projects to set
+   * @returns {Promise<ClientModel>} the client with the projects set
+   * @since 0.0.1
+   */
+  setProject(client: string, projects: ProjectEntity[]) {
+    this.logger.debug('setProject(): Enter');
+    this.logger.debug(`setProject(): client: ${JSON.stringify(client)}`);
+    this.logger.debug(`setProject(): projects: ${JSON.stringify(projects)}`);
+    try {
+      return this.clients
+        .findOneAndUpdate({ id: client }, { projects: projects }, { new: true })
+        .exec();
+    } catch (error) {
+      this.logger.error(`setProject(): error: ${JSON.stringify(error)}`);
+      throw error;
     }
   }
 }
