@@ -8,7 +8,6 @@ import {
   IsUUID,
 } from 'class-validator';
 import { i18n } from 'src/utils/entities/i18n.generic';
-import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
 import { ProjectEntity } from './project.entity';
 import { BaseCodedEntity } from 'src/utils/generics/entity-coded.entity';
