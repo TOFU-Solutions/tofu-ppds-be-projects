@@ -1,5 +1,8 @@
 import { Module } from '@nestjs/common';
 import { repositories } from './repsositories';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ClientModel } from './models/client.model';
+import { ClientModelSchema } from './schemas/client.schema';
 
 /**
  * @module DataModule
@@ -10,7 +13,17 @@ import { repositories } from './repsositories';
  */
 @Module({
   exports: [...repositories],
-  imports: [],
+  imports: [
+    MongooseModule.forFeatureAsync([
+      {
+        name: ClientModel.name,
+        useFactory: () => {
+          const schema = ClientModelSchema;
+          return schema;
+        },
+      },
+    ]),
+  ],
   providers: [...repositories],
 })
 export class DataModule {}
