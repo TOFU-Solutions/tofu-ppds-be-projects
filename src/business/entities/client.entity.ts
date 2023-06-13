@@ -22,6 +22,21 @@ import { v4 as uuid } from 'uuid';
  */
 export class ClientEntity extends BaseEntity {
   /**
+   * @property {string} code - the code of the client
+   * @since 0.0.1
+   */
+  @ApiProperty({
+    name: 'code',
+    description: 'the code of the client',
+    type: 'string',
+    required: true,
+    example: 'client-1',
+  })
+  @IsNotEmpty()
+  @IsDefined()
+  code: string;
+
+  /**
    * @property {string} description - the description of the client
    * @since 0.0.1
    */

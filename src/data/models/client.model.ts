@@ -13,6 +13,16 @@ import { BaseIndestructableModel } from 'src/utils/generics/model-undestructable
  */
 export class ClientModel extends BaseIndestructableModel {
   /**
+   * @property {string} code - the code of the client
+   * @since 0.0.1
+   */
+  @Prop({
+    type: String,
+    required: true,
+  })
+  code: string;
+
+  /**
    * @property {i18n[]} description - the description of the client
    * @since 0.0.1
    */
