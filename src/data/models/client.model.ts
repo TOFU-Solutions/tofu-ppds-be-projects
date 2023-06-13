@@ -19,6 +19,7 @@ export class ClientModel extends BaseIndestructableModel {
    */
   @Prop({
     type: String,
+    index: true,
     required: true,
   })
   code: string;
@@ -161,6 +162,7 @@ export class ClientModel extends BaseIndestructableModel {
       },
     ],
     default: [],
+    index: true,
     required: false,
   })
   projects: ProjectEntity[];
@@ -172,6 +174,7 @@ export class ClientModel extends BaseIndestructableModel {
   @Prop({
     type: String,
     required: true,
+    index: true,
   })
   workspace: string;
 }
