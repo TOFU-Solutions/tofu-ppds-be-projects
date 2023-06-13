@@ -1,0 +1,106 @@
+{
+    "application": "solutions.core.workspace",
+    "roles": [
+        {
+            "code": "SYS_ADMIN",
+            "description": [
+                { "locale": "en", "value": "Users who manages the configuration for the workspace" },
+                { "locale": "ch", "value": "负责管理工作区的配置之用户" },
+                { "locale": "jp", "value": "ワークスペースの設定を管理するユーザー" },
+                { "locale": "zh", "value": "負責管理工作區的設定之用戶" }
+            ],
+            "name": [
+                { "locale": "en", "value": "Workspace Administrator"},
+                { "locale": "ch", "value": "工作区管理员" },
+                { "locale": "jp", "value": "ワークスペース管理者" },
+                { "locale": "zh", "value": "工作區管理員" }
+            ]        
+        }
+    ],
+    "permissions": [
+        {
+          "object": "workspace",
+          "name": [
+              {"locale": "en", "value": "Workspace"},
+              {"locale": "ch", "value": "工作区"},
+              {"locale": "jp", "value": "ワークスペース"},
+              {"locale": "zh", "value": "工作區"}
+          ],
+          "description": [
+              {"locale": "en", "value": "The area where a team within the company operates" },
+              {"locale": "ch", "value": "公司内部的团队运作区域" },
+              {"loscale": "jp", "value": "会社内のチームが運営する領域" },
+              {"locale": "zh", "value": "公司內部的團隊運作區域" }
+          ],
+          "scopes": [
+              "create",
+              "delete",
+              "read",
+              "update",
+          ]
+        },
+        {
+          "object": "team",
+          "name": [
+              { "locale": "en", "value": "Team" },
+              { "locale": "ch", "value": "团队" },
+              { "locale": "jp", "value": "チーム" },
+              { "locale": "zh", "value": "團隊" }
+          ],
+          "description": [
+              { "locale": "en", "value": "The group of users that share a common set of properties and permissions" },
+              { "locale": "ch", "value": "共享一组属性和权限的用户群" },
+              { "locale": "jp", "value": "共通のプロパティと権限を共有するユーザーグループ" },
+              { "locale": "zh", "value": "共享一組屬性和權限的用戶群" }
+          ],
+          "scopes": [
+              "assign",
+              "create",
+              "delete",
+              "grant",
+              "read",
+              "update",
+          ]
+        },
+        {
+          "object": "settings",
+          "name": [
+              { "locale": "en", "value": "Settings" },
+              { "locale": "ch", "value": "设置" },
+              { "locale": "jp", "value": "設定" },
+              { "locale": "zh", "value": "設定" }
+          ],
+          "description": [
+              { "locale": "en", "value": "The application behaviour for all users for this workspace" },
+              { "locale": "ch", "value": "此工作区的所有用户的应用程序行为" },
+              { "locale": "jp", "value": "このワークスペースのすべてのユーザーのアプリケーション動作" },
+              { "locale": "zh", "value": "此工作區的所有用戶的應用程式行為" }
+          ],
+          "scope": [
+              "read",
+              "update"
+          ]
+        }
+    ],
+    "settings": [
+        { 
+            "description": [
+                { "locale": "en", "value": "The default locale for the workspace" },
+                { "locale": "ch", "value": "工作区的预设语系" },
+                { "locale": "jp", "value": "ワークスペースのデフォルトロケール" },
+                { "locale": "zh", "value": "工作區的預設語系"}
+            ],
+            "label": [
+                { "locale": "en", "value": "Default Language" },
+                { "locale": "ch", "value": "预设语系" },
+                { "locale": "jp", "value": "デフォルトロケール" },
+                { "locale": "zh", "value": "預設語系" }
+            ],
+            "key": "workspace.default.locale", 
+            
+        }
+    ],
+    "templates": [
+        
+    ]
+  }
