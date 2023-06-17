@@ -1,3 +1,5 @@
+import { ClientEntityService } from './client.service';
+import { DesignEntityService } from './design.service';
 import { ProjectEntityService } from './project.service';
 import { SystemService } from './system.service';
 
@@ -6,4 +8,9 @@ import { SystemService } from './system.service';
  * @since 0.0.1
  * @author Mark Leung <leungas@gmail.com>
  */
-export const services = [SystemService, ProjectEntityService];
+export const services = [
+  SystemService,
+  ProjectEntityService,
+  ClientEntityService,
+  DesignEntityService,
+];
