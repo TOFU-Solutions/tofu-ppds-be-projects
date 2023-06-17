@@ -8,6 +8,14 @@ import {
 } from 'class-validator';
 import { v4 as uuid } from 'uuid';
 
+/**
+ * @class
+ * @name FileEntity
+ * @description The entity representing an uploadable file in the application
+ * @version 0.0.1
+ * @since 0.0.1
+ * @author Mark Leung <leungas@gmail.com>
+ */
 export class FileEntity {
   /**
    * @property {string} description - the description to display for the file, if not provided the type is used
