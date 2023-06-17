@@ -13,6 +13,7 @@ import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
 import { ProjectStatus } from '../enums/project-status.enum';
+import { DesignEntity } from './design.entity';
 
 /**
  * @class
@@ -39,6 +40,24 @@ export class ProjectEntity extends BaseEntity {
   @MinLength(1)
   @IsDefined()
   collection: string;
+
+  /**
+   * @property {DesignEntity[]} designs - the designs of the project
+   * @since 0.0.1
+   */
+  @ApiProperty({
+    name: 'designs',
+    description: 'the designs of the project',
+    type: 'array',
+    items: {
+      type: 'DesignEntity',
+    },
+    required: false,
+    default: [],
+  })
+  @IsObject({ each: true })
+  @IsOptional()
+  designs: DesignEntity[] = [];
 
   /**
    * @property {i18n[]} description - the description of the project
