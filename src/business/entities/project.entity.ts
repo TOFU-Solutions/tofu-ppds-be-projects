@@ -9,7 +9,6 @@ import {
   IsUUID,
   MinLength,
 } from 'class-validator';
-import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
 import { ProjectStatus } from '../enums/project-status.enum';
@@ -66,21 +65,14 @@ export class ProjectEntity extends BaseEntity {
   @ApiProperty({
     name: 'description',
     description: 'the description of the project',
-    type: 'array',
-    items: {
-      type: 'i18n',
-    },
+    type: 'string',
     required: false,
-    example: [
-      { locale: 'en', value: 'Project Description' },
-      { locale: 'ch', value: '項目描述' },
-      { locale: 'jp', value: 'プロジェクトの説明' },
-      { locale: 'zh', value: '项目描述' },
-    ],
+    example: 'Project Description',
   })
-  @IsObject({ each: true })
+  @IsNotEmpty()
+  @MinLength(1)
   @IsOptional()
-  description?: i18n[];
+  description?: string;
 
   /**
    * @property {string} name - the name of the project
