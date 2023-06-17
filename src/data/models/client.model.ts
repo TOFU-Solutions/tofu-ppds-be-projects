@@ -1,4 +1,5 @@
 import { Prop } from '@nestjs/mongoose';
+import { DesignEntity } from 'src/business/entities/design.entity';
 import { ProjectEntity } from 'src/business/entities/project.entity';
 import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseIndestructableModel } from 'src/utils/generics/model-undestructable.generic';
@@ -23,6 +24,51 @@ export class ClientModel extends BaseIndestructableModel {
     required: true,
   })
   code: string;
+
+  /**
+   * @property {DesignEntity[]} designs - the designs as part of this project/season
+   * @since 0.0.1
+   */
+  @Prop({
+    type: [
+      {
+        artifacts: [],
+        code: {
+          type: String,
+        },
+        commited: {
+          type: Boolean,
+          default: false,
+        },
+        designer: {
+          type: String,
+          required: true,
+        },
+        description: [
+          {
+            locale: {
+              type: String,
+              required: true,
+              validate: [
+                (v: string) => v.length === 2,
+                'The locale string must be 2 characters and comply to ISO-689-1',
+              ],
+            },
+          },
+        ],
+        name: {
+          type: String,
+          required: true,
+        },
+        tags: {
+          type: [String],
+          default: [],
+        },
+      },
+    ],
+    default: [],
+  })
+  designs: DesignEntity[];
 
   /**
    * @property {i18n[]} description - the description of the client
