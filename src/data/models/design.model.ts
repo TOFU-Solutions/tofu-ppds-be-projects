@@ -1,16 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
-import {
-  IsBoolean,
-  IsDefined,
-  IsNotEmpty,
-  IsObject,
-  IsOptional,
-  IsUUID,
-  MinLength,
-} from 'class-validator';
+import { Prop, Schema } from '@nestjs/mongoose';
+import { isUUID } from 'class-validator';
 import { FileEntity } from 'src/utils/entities/file.generic';
-import { BaseCodedEntity } from 'src/utils/generics/entity-coded.entity';
-import { v4 as uuid } from 'uuid';
+import { BaseIndestructableModel } from 'src/utils/generics/model-undestructable.generic';
 
 /**
  * @class
@@ -18,142 +9,131 @@ import { v4 as uuid } from 'uuid';
  * @description the design refers to a design a collection is for
  * @version 0.0.1
  * @since 0.0.1
- * @extends BaseEntity
+ * @extends BaseCodedEntity
  * @author Mark Leung <leungas@gmail.com>
  */
-export class DesignEntity extends BaseCodedEntity {
+@Schema({
+  collection: 'designs',
+})
+export class DesignModel extends BaseIndestructableModel {
   /**
    * @property {FileEntity[]} artifacts - the artifacts of the design
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'artifacts',
     description: 'the artifacts of the design',
-    type: 'array',
-    items: {
-      type: 'FileEntity',
-    },
-    required: false,
+    type: [
+      {
+        description: {
+          type: String,
+          required: false,
+        },
+        id: {
+          type: String,
+          required: true,
+          validate: [
+            (v: string) => isUUID(v, 4),
+            'Valid should be an UUID value',
+          ],
+        },
+        label: {
+          type: String,
+          required: false,
+        },
+        type: {
+          type: String,
+          required: true,
+        },
+      },
+    ],
     default: [],
-    example: [],
   })
-  @IsObject({ each: true })
-  @IsOptional()
-  artifacts: FileEntity[] = [];
+  artifacts: FileEntity[];
 
   /**
    * @property {string} code - the code of the design
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'code',
     description: 'the code of the design',
-    type: 'string',
+    type: String,
     required: true,
-    example: 'design-1',
   })
-  @IsNotEmpty()
-  @IsDefined()
   code: string;
 
   /**
-   * @property {boolean} committed - is the design committed into order and production
+   * @property {boolean} commited - is the design committed into order and production
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'committed',
     description: 'is the design committed into order and production',
-    type: 'boolean',
-    required: false,
+    type: Boolean,
     default: false,
-    example: false,
   })
-  @IsBoolean()
-  @IsOptional()
-  committed = false;
+  commited: boolean;
 
   /**
    * @property {string} designer - the designer of the design
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'designer',
     description: 'the designer of the design',
-    type: 'string',
+    type: String,
     required: true,
-    example: uuid(),
+    validate: [(v: string) => isUUID(v, 4), 'Valid should be an UUID value'],
   })
-  @IsUUID()
-  @IsDefined()
   designer: string;
 
   /**
-   * @property {i18n[]} description - the description of the design
+   * @property {string} description - the description of the design
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'description',
     description: 'the description of the design',
-    type: 'array',
-    items: {
-      type: 'i18n',
-    },
+    type: String,
     required: false,
-    default: [],
-    example: 'Design Description',
   })
-  @IsNotEmpty()
-  @IsOptional()
-  description?: string;
+  description: string;
 
   /**
    * @property {string} name - the name of the design
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'name',
     description: 'the name of the design',
-    type: 'string',
+    type: String,
     required: true,
-    example: 'design-1',
   })
-  @IsNotEmpty()
-  @MinLength(1)
-  @IsDefined()
   name: string;
 
   /**
    * @property {string} project - the project the design belongs to
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'project',
     description: 'the project the design belongs to',
-    type: 'string',
+    type: String,
     required: true,
-    example: uuid(),
+    validate: [(v: string) => isUUID(v, 4), 'Valid should be an UUID value'],
   })
-  @IsUUID()
-  @IsDefined()
   project: string;
 
   /**
    * @property {string[]} tags - the tags of the design
    * @since 0.0.1
    */
-  @ApiProperty({
+  @Prop({
     name: 'tags',
     description: 'the tags of the design',
-    type: 'array',
-    items: {
-      type: 'string',
-    },
-    required: false,
+    type: [String],
     default: [],
-    example: ['tag-1', 'tag-2'],
   })
-  @IsNotEmpty({ each: true })
-  @MinLength(1, { each: true })
-  @IsOptional()
-  tags: string[] = [];
+  tags: string[];
 }
