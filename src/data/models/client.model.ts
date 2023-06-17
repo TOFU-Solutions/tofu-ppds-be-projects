@@ -1,4 +1,5 @@
 import { Prop } from '@nestjs/mongoose';
+import { isUUID } from 'class-validator';
 import { DesignEntity } from 'src/business/entities/design.entity';
 import { ProjectEntity } from 'src/business/entities/project.entity';
 import { i18n } from 'src/utils/entities/i18n.generic';
@@ -32,7 +33,30 @@ export class ClientModel extends BaseIndestructableModel {
   @Prop({
     type: [
       {
-        artifacts: [],
+        artifacts: [
+          {
+            description: {
+              type: String,
+              required: false,
+            },
+            id: {
+              type: String,
+              required: true,
+              validate: [
+                (v: string) => isUUID(v, '4'),
+                'Valid needs to be an UUID',
+              ],
+            },
+            label: {
+              type: String,
+              required: false,
+            },
+            type: {
+              type: String,
+              required: true,
+            },
+          },
+        ],
         code: {
           type: String,
         },

@@ -7,6 +7,7 @@ import {
   IsUUID,
   MinLength,
 } from 'class-validator';
+import { FileEntity } from 'src/utils/entities/file.generic';
 import { i18n } from 'src/utils/entities/i18n.generic';
 import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
@@ -21,7 +22,7 @@ import { v4 as uuid } from 'uuid';
  * @author Mark Leung <leungas@gmail.com>
  */
 export class DesignEntity extends BaseEntity {
-  artifacts: any[];
+  artifacts: FileEntity[];
 
   /**
    * @property {string} code - the code of the design
