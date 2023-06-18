@@ -11,8 +11,9 @@ import { ProjectEntity } from 'src/domains/projects/business/entities/project.en
  * @author Mark Leung <leungas@gmail.com>
  */
 export class ProjectCreateRequestObject extends OmitType(ProjectEntity, [
+  'id',
   'createdOn',
   'lastUpdatedOn',
-  'designs',
+  'owner',
   'status',
 ] as const) {}

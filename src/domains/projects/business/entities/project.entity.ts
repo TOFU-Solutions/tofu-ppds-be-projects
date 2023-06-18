@@ -13,6 +13,7 @@ import { BaseEntity } from 'src/utils/generics/entity.generic';
 import { v4 as uuid } from 'uuid';
 import { ProjectStatus } from '../enums/project-status.enum';
 import { DesignEntity } from './design.entity';
+import { BaseCodedEntity } from 'src/utils/generics/entity-coded.entity';
 
 /**
  * @class
@@ -23,7 +24,7 @@ import { DesignEntity } from './design.entity';
  * @extends BaseEntity
  * @author Mark Leung <leungas@gmail.com>
  */
-export class ProjectEntity extends BaseEntity {
+export class ProjectEntity extends BaseCodedEntity {
   /**
    * @property {string} collection - the collection the project belongs to
    * @since 0.0.1
@@ -39,24 +40,6 @@ export class ProjectEntity extends BaseEntity {
   @MinLength(1)
   @IsDefined()
   code: string;
-
-  /**
-   * @property {DesignEntity[]} designs - the designs of the project
-   * @since 0.0.1
-   */
-  @ApiProperty({
-    name: 'designs',
-    description: 'the designs of the project',
-    type: 'array',
-    items: {
-      type: 'DesignEntity',
-    },
-    required: false,
-    default: [],
-  })
-  @IsObject({ each: true })
-  @IsOptional()
-  designs: DesignEntity[] = [];
 
   /**
    * @property {i18n[]} description - the description of the project
