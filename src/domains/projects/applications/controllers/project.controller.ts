@@ -11,6 +11,7 @@ import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { ApiBody, ApiOperation, ApiParam, ApiTags } from '@nestjs/swagger';
 import { ProjectCreateCommand } from '../../business/commands/project-create.command';
 import { v4 as uuid } from 'uuid';
+import { plainToInstance } from 'class-transformer';
 
 /**
  * @class
@@ -74,6 +75,11 @@ export class ProjectController {
     this.logger.debug(`create(): Enter`);
     this.logger.debug(`create(): workspace = ${workspace}`);
     this.logger.debug(`create(): request = ${JSON.stringify(request)}`);
-    return this.comamnds.execute(request);
+    const command = Object.assign(
+      plainToInstance(ProjectCreateCommand, request),
+      { owner: workspace },
+    );
+    this.logger.debug(`create(): command = ${JSON.stringify(command)}`);
+    return this.comamnds.execute(command);
   }
 }
