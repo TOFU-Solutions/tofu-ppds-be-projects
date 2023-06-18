@@ -3,6 +3,7 @@ import { services } from './services';
 import { DataModule } from 'src/domains/projects/data/data.module';
 import { InfrastructureModule } from 'src/infrastructure/infrastructure.module';
 import { commands } from './commands';
+import { queries } from './queries';
 
 /**
  * @module BusinessModule
@@ -14,6 +15,6 @@ import { commands } from './commands';
 @Module({
   exports: [...services],
   imports: [DataModule, InfrastructureModule],
-  providers: [...services, ...commands],
+  providers: [...services, ...commands, ...queries],
 })
 export class BusinessModule {}
