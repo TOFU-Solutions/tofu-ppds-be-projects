@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ProjectsModule } from './projects/projects.module';
+import { SamplesModule } from './samples/samples.module';
 
 /**
  * @module DomainsModule
@@ -9,7 +10,7 @@ import { ProjectsModule } from './projects/projects.module';
  * @author Mark Leung <leungas@gmail.com>
  */
 @Module({
-  imports: [ProjectsModule],
-  exports: [ProjectsModule],
+  imports: [ProjectsModule, SamplesModule],
+  exports: [ProjectsModule, SamplesModule],
 })
 export class DomainsModule {}
