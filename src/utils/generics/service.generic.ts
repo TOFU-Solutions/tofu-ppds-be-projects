@@ -27,7 +27,7 @@ export abstract class BaseEntityService<
    * @readonly
    * @property {Logger} logger - the logger for the service
    */
-  protected readonly logger = new Logger(`service<${this.constructor.name}?`, {
+  protected readonly logger = new Logger(`service<${this.constructor.name}>`, {
     timestamp: true,
   });
 
@@ -177,11 +177,11 @@ export abstract class BaseEntityService<
   async update(...args: any[]): Promise<T> {
     this.logger.debug(`update(): Enter`);
     this.logger.debug(`update(): args = ${JSON.stringify(args)}`);
-    const model = await this.get(this.identify(args[0]));
+    const model = await this.get(args[0]);
     this.logger.debug(`update(): model = ${JSON.stringify(model)}`);
     if (!model)
       throw new NotFoundException(`The entity does not exists in persistence`);
-    const mutation = Object.assign(this.convert(model), args[0]);
+    const mutation = Object.assign(this.convert(model), args[1]);
     this.logger.debug(`update(): mutation = ${JSON.stringify(mutation)}`);
     const result = await this.repository.update(mutation);
     this.logger.debug(`update(): result = ${JSON.stringify(result)}`);

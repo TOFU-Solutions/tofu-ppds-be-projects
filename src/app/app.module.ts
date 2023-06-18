@@ -1,6 +1,4 @@
 import { Module } from '@nestjs/common';
-import { BusinessModule } from '../business/business.module';
-import { DataModule } from '../data/data.module';
 import { InfrastructureModule } from '../infrastructure/infrastructure.module';
 import { controllers } from './controllers';
 import { ConfigModule, ConfigService } from '@nestjs/config';
@@ -8,6 +6,7 @@ import configuration from 'src/infrastructure/config/configuration';
 import { MongooseModule } from '@nestjs/mongoose';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtModule } from '@nestjs/jwt';
+import { DomainsModule } from 'src/domains/domains.module';
 
 /**
  * @module AppModule
@@ -18,12 +17,11 @@ import { JwtModule } from '@nestjs/jwt';
  */
 @Module({
   imports: [
-    BusinessModule,
     ConfigModule.forRoot({
       load: [configuration],
       isGlobal: true,
     }),
-    DataModule,
+    DomainsModule,
     EventEmitterModule.forRoot({
       maxListeners: 100,
     }),
